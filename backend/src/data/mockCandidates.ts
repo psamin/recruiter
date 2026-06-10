@@ -1,0 +1,253 @@
+import type { Candidate } from "../types";
+
+// ---------------------------------------------------------------------------
+// MOCK DATA
+//
+// These candidates are intentionally fake. Names, emails, phones and profile
+// links are placeholders so this can be demoed without touching any real
+// person's data. Replace this dataset (and candidates.service.ts) with a
+// compliant search/sourcing provider when going live.
+// ---------------------------------------------------------------------------
+
+export const MOCK_CANDIDATES: Candidate[] = [
+  {
+    id: "c-001",
+    name: "Maria Castillo",
+    title: "Associate Attorney, Personal Injury",
+    company: "Hudson & Reyes LLP",
+    location: "Newark, NJ",
+    practiceArea: "Personal Injury / Plaintiff-side litigation",
+    languages: ["English", "Spanish"],
+    linkedinUrl: "https://www.linkedin.com/in/example-maria-castillo",
+    profileUrl: "https://example.com/profiles/maria-castillo",
+    email: "m.castillo@example.com",
+    phone: "+1 (201) 555-0142",
+    source: "Mock dataset",
+    fitScore: 94,
+    summary:
+      "Bilingual early-career PI associate with 3 years handling auto and premises liability matters. Manages her own caseload end-to-end and frequently works directly with Spanish-speaking clients.",
+    whyMatch:
+      "Personal injury focus in NJ, fluent Spanish, and early-career — closely matches the prompt's core criteria.",
+    status: "new",
+  },
+  {
+    id: "c-002",
+    name: "Daniel Okafor",
+    title: "Plaintiff-Side Litigation Associate",
+    company: "Greenpoint Trial Group",
+    location: "Brooklyn, NY",
+    practiceArea: "Plaintiff-side litigation / Mass tort",
+    languages: ["English"],
+    linkedinUrl: "https://www.linkedin.com/in/example-daniel-okafor",
+    profileUrl: "https://example.com/profiles/daniel-okafor",
+    email: "d.okafor@example.com",
+    phone: "+1 (718) 555-0199",
+    source: "Mock dataset",
+    fitScore: 81,
+    summary:
+      "Litigation associate (2.5 years) with depositions and motion practice experience on plaintiff-side cases. Strong writing background from a prior judicial clerkship.",
+    whyMatch:
+      "NY-based plaintiff-side litigation experience and early-career stage fit the role; no Spanish noted.",
+    status: "new",
+  },
+  {
+    id: "c-003",
+    name: "Priya Nair",
+    title: "Bilingual Associate Attorney",
+    company: "Liberty Legal Partners",
+    location: "Jersey City, NJ",
+    practiceArea: "Personal Injury / Med-legal",
+    languages: ["English", "Hindi", "Spanish"],
+    linkedinUrl: "https://www.linkedin.com/in/example-priya-nair",
+    profileUrl: "https://example.com/profiles/priya-nair",
+    email: "p.nair@example.com",
+    phone: "+1 (201) 555-0177",
+    source: "Mock dataset",
+    fitScore: 89,
+    summary:
+      "Associate with combined PI and medical-legal review experience. Reviews medical records for damages and coordinates with treating physicians.",
+    whyMatch:
+      "Med-legal + PI background, NJ location, and multilingual including Spanish — strong cross-functional fit.",
+    status: "new",
+  },
+  {
+    id: "c-004",
+    name: "James Whitfield",
+    title: "Case Manager, Personal Injury",
+    company: "Atlas Injury Law",
+    location: "New York, NY",
+    practiceArea: "Case management / Client intake",
+    languages: ["English"],
+    linkedinUrl: "https://www.linkedin.com/in/example-james-whitfield",
+    profileUrl: "https://example.com/profiles/james-whitfield",
+    email: "j.whitfield@example.com",
+    phone: "+1 (212) 555-0123",
+    source: "Mock dataset",
+    fitScore: 72,
+    summary:
+      "Experienced PI case manager overseeing 120+ active files. Coordinates treatment scheduling, medical records retrieval, and settlement documentation.",
+    whyMatch:
+      "Operational PI experience in NY; not an attorney but valuable for case-management hiring needs.",
+    status: "new",
+  },
+  {
+    id: "c-005",
+    name: "Sofia Mendez",
+    title: "Legal Intake Specialist",
+    company: "Northside Accident Attorneys",
+    location: "Queens, NY",
+    practiceArea: "Intake / Client screening",
+    languages: ["English", "Spanish"],
+    linkedinUrl: "https://www.linkedin.com/in/example-sofia-mendez",
+    profileUrl: "https://example.com/profiles/sofia-mendez",
+    email: "s.mendez@example.com",
+    phone: "+1 (347) 555-0188",
+    source: "Mock dataset",
+    fitScore: 76,
+    summary:
+      "Bilingual intake specialist who screens new PI leads, gathers incident details, and converts inquiries to signed clients with a strong retention rate.",
+    whyMatch:
+      "Bilingual (Spanish), NY-based, and works the front of the PI funnel — useful for intake-team growth.",
+    status: "new",
+  },
+  {
+    id: "c-006",
+    name: "Aaron Feldman",
+    title: "Med-Legal Operations Lead",
+    company: "Meridian Medical-Legal Services",
+    location: "Hoboken, NJ",
+    practiceArea: "Medical-legal operations",
+    languages: ["English"],
+    linkedinUrl: "https://www.linkedin.com/in/example-aaron-feldman",
+    profileUrl: "https://example.com/profiles/aaron-feldman",
+    email: "a.feldman@example.com",
+    phone: "+1 (201) 555-0166",
+    source: "Mock dataset",
+    fitScore: 79,
+    summary:
+      "Runs med-legal operations connecting law firms with treating providers and IME scheduling. Background in healthcare administration.",
+    whyMatch:
+      "Direct med-legal operations expertise in NJ — aligns with the med-legal angle of the prompt.",
+    status: "new",
+  },
+  {
+    id: "c-007",
+    name: "Grace Liu",
+    title: "Paralegal, Personal Injury",
+    company: "Harbor & Stone PC",
+    location: "Manhattan, NY",
+    practiceArea: "Paralegal / Litigation support",
+    languages: ["English", "Mandarin"],
+    linkedinUrl: "https://www.linkedin.com/in/example-grace-liu",
+    profileUrl: "https://example.com/profiles/grace-liu",
+    email: "g.liu@example.com",
+    phone: "+1 (212) 555-0151",
+    source: "Mock dataset",
+    fitScore: 68,
+    summary:
+      "PI paralegal preparing demand packages, drafting pleadings, and managing discovery. Detail-oriented with strong medical-records summarization skills.",
+    whyMatch:
+      "Solid PI litigation support in NY; multilingual but not Spanish-speaking.",
+    status: "new",
+  },
+  {
+    id: "c-008",
+    name: "Carlos Ramirez",
+    title: "Early-Career PI Attorney",
+    company: "Ramirez Law (Solo Practice)",
+    location: "Paterson, NJ",
+    practiceArea: "Personal Injury",
+    languages: ["English", "Spanish"],
+    linkedinUrl: "https://www.linkedin.com/in/example-carlos-ramirez",
+    profileUrl: "https://example.com/profiles/carlos-ramirez",
+    email: "c.ramirez@example.com",
+    phone: "+1 (973) 555-0134",
+    source: "Mock dataset",
+    fitScore: 91,
+    summary:
+      "Recently licensed attorney (1.5 years) running a small PI practice serving a heavily Hispanic community. Looking to join a larger firm with more resources.",
+    whyMatch:
+      "Early-career, native Spanish speaker, PI-focused in NJ, and actively seeking — high-fit lead.",
+    status: "new",
+  },
+  {
+    id: "c-009",
+    name: "Hannah Brooks",
+    title: "Associate Attorney, Med-Mal & PI",
+    company: "Brookstone Trial Lawyers",
+    location: "White Plains, NY",
+    practiceArea: "Medical malpractice / Personal injury",
+    languages: ["English"],
+    linkedinUrl: "https://www.linkedin.com/in/example-hannah-brooks",
+    profileUrl: "https://example.com/profiles/hannah-brooks",
+    email: "h.brooks@example.com",
+    phone: "+1 (914) 555-0109",
+    source: "Mock dataset",
+    fitScore: 83,
+    summary:
+      "Associate splitting time between med-mal and PI matters. Comfortable reviewing complex medical causation and working with expert witnesses.",
+    whyMatch:
+      "Med-legal-adjacent PI experience in NY; early-career attorney without Spanish.",
+    status: "new",
+  },
+  {
+    id: "c-010",
+    name: "Luis Fernandez",
+    title: "Bilingual Case Manager",
+    company: "Five Boroughs Injury Group",
+    location: "Bronx, NY",
+    practiceArea: "Case management / Medical coordination",
+    languages: ["English", "Spanish", "Portuguese"],
+    linkedinUrl: "https://www.linkedin.com/in/example-luis-fernandez",
+    profileUrl: "https://example.com/profiles/luis-fernandez",
+    email: "l.fernandez@example.com",
+    phone: "+1 (718) 555-0175",
+    source: "Mock dataset",
+    fitScore: 80,
+    summary:
+      "Bilingual case manager coordinating medical treatment and lien resolution for a high-volume PI firm. Trusted point of contact for Spanish-speaking clients.",
+    whyMatch:
+      "Spanish-speaking, NY-based, med-coordination experience — fits bilingual operations needs.",
+    status: "new",
+  },
+  {
+    id: "c-011",
+    name: "Olivia Bennett",
+    title: "Junior Litigation Associate",
+    company: "Bennett & Cho LLP",
+    location: "New York, NY",
+    practiceArea: "Plaintiff-side litigation",
+    languages: ["English", "Korean"],
+    linkedinUrl: "https://www.linkedin.com/in/example-olivia-bennett",
+    profileUrl: "https://example.com/profiles/olivia-bennett",
+    email: "o.bennett@example.com",
+    phone: "+1 (212) 555-0118",
+    source: "Mock dataset",
+    fitScore: 74,
+    summary:
+      "First-year litigation associate supporting senior partners on plaintiff-side cases. Strong research and brief-drafting skills, eager to take on PI work.",
+    whyMatch:
+      "Very early-career NY litigator open to PI; multilingual but not Spanish.",
+    status: "new",
+  },
+  {
+    id: "c-012",
+    name: "Diego Santos",
+    title: "Legal Intake & Med-Legal Coordinator",
+    company: "Santos Injury Advocates",
+    location: "Elizabeth, NJ",
+    practiceArea: "Intake / Med-legal coordination",
+    languages: ["English", "Spanish"],
+    linkedinUrl: "https://www.linkedin.com/in/example-diego-santos",
+    profileUrl: "https://example.com/profiles/diego-santos",
+    email: "d.santos@example.com",
+    phone: "+1 (908) 555-0192",
+    source: "Mock dataset",
+    fitScore: 85,
+    summary:
+      "Hybrid intake and med-legal coordinator who screens new PI matters and books initial medical evaluations. Bilingual and process-driven.",
+    whyMatch:
+      "Combines intake + med-legal in NJ with Spanish fluency — broad fit across the prompt's themes.",
+    status: "new",
+  },
+];
